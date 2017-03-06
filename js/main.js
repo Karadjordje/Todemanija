@@ -52,10 +52,8 @@ function gameScreen() {
 
 
 	// with this function we add virtual keyboard for mobile users and we do not affect desktop gameplay
-	$(document).on("click",function() {
-		$('#dummy').focus();
-	});
-	$('#dummy').focus();
+	$('#gameContent').append("<input type='text' id='dummy'>");
+	$("#dummy").css({"position":"fixed","left":"120%"}).focus();
 
 } // we are making our screen
 
