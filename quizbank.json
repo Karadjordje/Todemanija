@@ -6,8 +6,8 @@
 	},
 
 	{
-		"word":"dunav",
-		"clue":"reka"
+		"word":"simpatija",
+		"clue":"joko"
 	},
 
 	{
@@ -16,18 +16,32 @@
 	},
 
 	{
-		"word":"durmitor",
-		"clue":"planina"
+		"word":"vid prevoza",
+		"clue":"voz"
 	},
 
 	{
-		"word":"diskoteka",
-		"clue":"mesto izlaska"
+		"word":"jedinica u vojsci",
+		"clue":"mornarica"
 	},
 
 	{
-		"word":"drakula",
-		"clue":"životinja"
+		"word":"meso",
+		"clue":"rolovano"
+	},
+
+	{
+		"word":"nadimak",
+		"clue":"milos"
+	},
+
+	{
+		"word":"Vrsta ribe",
+		"clue":"haringa"
+	},
+
+	{
+		"word":"roditelji misle da se",
+		"clue":"drogira"
 	}
-
 ]} 
