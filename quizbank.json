@@ -6,8 +6,8 @@
 	},
 
 	{
-		"word":"simpatija",
-		"clue":"joko"
+		"word":"joko",
+		"clue":"simpatija"
 	},
 
 	{
@@ -16,32 +16,32 @@
 	},
 
 	{
-		"word":"vid prevoza",
-		"clue":"voz"
+		"word":"voz",
+		"clue":"vid prevoza"
 	},
 
 	{
-		"word":"jedinica u vojsci",
-		"clue":"mornarica"
+		"word":"mornarica",
+		"clue":"jedinica u vojsci"
 	},
 
 	{
-		"word":"meso",
-		"clue":"rolovano"
+		"word":"rolovano",
+		"clue":"meso"
 	},
 
 	{
-		"word":"nadimak",
-		"clue":"milos"
+		"word":"milos",
+		"clue":"nadimak"
 	},
 
 	{
-		"word":"Vrsta ribe",
-		"clue":"haringa"
+		"word":"haringa",
+		"clue":"Vrsta ribe"
 	},
 
 	{
-		"word":"roditelji misle da se",
-		"clue":"drogira"
+		"word":"drogira",
+		"clue":"roditelji misle da se"
 	}
-]} 
+]}
