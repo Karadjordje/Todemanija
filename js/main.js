@@ -72,7 +72,11 @@ function getWord() {
   // then we form an array containing the letters of the current word by splitting it
 
 function handleKeyUp(event) {
-
+	
+	if(event.keyCode==229) {
+		event.keyCode=$('#dummy').val().slice($('#dummy').val().length-1,$('#dummy').val().length).toUpperCase().charCodeAt(0);
+	}
+	
 	if(event.keyCode>64 && event.keyCode<91) {
 
 		var found=false; // found will help us determine if the submitted letter is found in the word
