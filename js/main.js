@@ -28,7 +28,7 @@ function titleScreen(){
 	
 function gameScreen(){
 	$('#gameContent').empty();
-	$('#gameContent').append('<div id="pixHolder"><img id="hangman" src="man.png"></div>');
+	$('#gameContent').append('<div id="pixHolder"><img id="hangman" src="images/todemanija.png"></div>');
 	$('#gameContent').append('<div id="wordHolder"></div>');
 	$('#gameContent').append('<div id="clueHolder"></div>');
 	$('#gameContent').append('<div id="guesses">Previous guesses:</div>');
