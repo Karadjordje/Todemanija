@@ -1,0 +1,4 @@
+U ovoj verziji dodao si funkciju start i promenio
+funkcije defeatMessage i finalPage. Ovo si uradio
+da bi mogao da ogranicis broj pitanja koji ces postavljati
+, a takodje i da bi igra kretala skroz ispocetka.

@@ -8,19 +8,25 @@ var currentWord;
 var currentClue;
 var wrongAnswerCount;
 
-$.getJSON('quizbank.json', function(data) {
 
-	for (i=0; i<data.wordlist.length; i++) {
-		questionBank[i]=new Array;
-		questionBank[i][0]=data.wordlist[i].word;
-		questionBank[i][1] = data.wordlist[i].clue;
-	}
-	titleScreen();
+function start() {
 
-});
+	$.getJSON('quizbank.json', function(data) {
+
+		for (i=0; i<data.wordlist.length; i++) {
+			questionBank[i]=new Array;
+			questionBank[i][0]=data.wordlist[i].word;
+			questionBank[i][1] = data.wordlist[i].clue;
+		}
+		titleScreen();
+	});	
+
+}
+start(); // this function allows game to start from scratch when somobody loses for example
 
 function titleScreen() {
 
+	$('#gameContent').empty();
 	$('#gameContent').append('<div id="gameTitle">Todemanija</div><div id="startButton" class="button">Počni</div>');
 	$('#startButton').on("click",function (){
 		gameScreen();
@@ -57,6 +63,11 @@ function gameScreen() {
 
 } // we are making our screen
 
+// I added this function in case the user loses the input focus during the game because of a tap outside the keyboard
+function keepFocus(){
+    $(document).find("#dummy").focus();
+}
+
 function getWord() {
 
 	var rnd=Math.floor(Math.random()*questionBank.length);
@@ -72,7 +83,7 @@ function getWord() {
 function handleKeyUp(event) {
 
 
-	//this line deals with glitch in recent versions of android
+	// this line deals with glitch in recent versions of android
 	if(event.keyCode==229) {
 		event.keyCode=$('#dummy').val().slice($('#dummy').val().length-1,$('#dummy').val().length).toUpperCase().charCodeAt(0);
 	}
@@ -144,12 +155,28 @@ function wrongAnswer(a) {
 function victoryMessage() {
 
 	$(document).off("keyup", handleKeyUp); // we remove the key handler that we instituted
-	$('#feedback').append("Bravo!<br><br><div id='replay' class='button'>Nastavi</div>");
+	$('#feedback').append("Bravo!<br><br><div id='replay' class='button' contenteditable>Nastavi</div>");
 
 
 	// This code will check whether we have any questions left in the databank
 	// and if so will restart the game if not the final page will be displayed
-	$('#replay').on("click",function () {
+	// we call this block of code on click and keypress > first we check if element is present on screen if ($('#replay').length)
+	// if it it present then our block continuous
+	$(document).keypress(function(e) {
+		if ($('#replay').length) {
+			if(e.which == 13) {
+				if(questionBank.length>0) {
+					gameScreen();
+				}
+				else {
+					finalPage();
+				}
+		    }
+		}
+
+	});
+
+	$("#replay").on("click", function(){
 		if(questionBank.length>0) {
 			gameScreen();
 		}
@@ -158,6 +185,8 @@ function victoryMessage() {
 		}
 	});
 
+	// to deactivate the virtual keyboard
+	$(document).off("tap", keepFocus).trigger("tap");
 }
 
 function defeatMessage() {
@@ -167,18 +196,39 @@ function defeatMessage() {
 	$(document).off("keyup", handleKeyUp);
 	$('#feedback').append("A ne možež tako!<br>(odgovor= "+ currentWord +")<div id='replay' class='button'>Probaj opet</div>");
 
-	$('#replay').on("click",function () {
+
+	$(document).keypress(function(e) {
+		if ($('#replay').length) {
+			if(e.which == 13) {
+				if(questionBank.length>0) {
+					start();
+				}
+		    }
+		}
+
+	});
+
+	$("#replay").on("click", function(){
 		if(questionBank.length>0) {
-			gameScreen();
+			start();
 		}
 	});
 
+
+	// to deactivate the virtual keyboard
+	$(document).off("tap", keepFocus).trigger("tap");
 }
 
 function finalPage() {
 
 	$('#gameContent').empty();
 	$('#gameContent').append('<div id="finalMessage">Svaka čast. Miloš je spašen!</div>');
+	$('#gameContent').append('<div id="feedback"></div>');
+	$('#feedback').append("<div id='replay' class='button'>Igraj Opet</div>");
+
+	$('#replay').on("click",function () {
+		start();
+	});
 
 }
 
