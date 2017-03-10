@@ -21,6 +21,8 @@ function start() {
 		titleScreen();
 	});	
 
+	$(document).on("touchstart", keepFocus);
+
 }
 start(); // this function allows game to start from scratch when somobody loses for example
 
@@ -33,6 +35,16 @@ function titleScreen() {
 	});
 
 } // we are adding content
+
+
+// I added this function in case the user loses the input focus during the game because of a tap outside the keyboard
+// It looks like touchstart event is better than tap for this... And a timeout is necessary to make it reappear automatically. 
+// Probably because there is an "animation" to make it appear
+function keepFocus(){
+	setTimeout(function(){
+	    $(document).find("#dummy").focus();
+	},100);
+}
 
 function gameScreen() {
 
@@ -60,13 +72,10 @@ function gameScreen() {
 	// with this function we add virtual keyboard for mobile users and we do not affect desktop gameplay
 	$('#gameContent').append("<input type='text' id='dummy'>");
 	$("#dummy").css({"position":"fixed","left":"120%"}).focus();
+	$(document).on("touchstart", keepFocus);
 
 } // we are making our screen
 
-// I added this function in case the user loses the input focus during the game because of a tap outside the keyboard
-function keepFocus(){
-    $(document).find("#dummy").focus();
-}
 
 function getWord() {
 
@@ -186,7 +195,8 @@ function victoryMessage() {
 	});
 
 	// to deactivate the virtual keyboard
-	$(document).off("tap", keepFocus).trigger("tap");
+	$(document).off("touchstart", keepFocus);
+	$("#dummy").blur();
 }
 
 function defeatMessage() {
@@ -216,7 +226,8 @@ function defeatMessage() {
 
 
 	// to deactivate the virtual keyboard
-	$(document).off("tap", keepFocus).trigger("tap");
+	$(document).off("touchstart", keepFocus);
+	$("#dummy").blur();
 }
 
 function finalPage() {
